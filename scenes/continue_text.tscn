@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://cpcbb4xnfxo3s"]
+
+[ext_resource type="FontFile" uid="uid://bg38rbtqovy6i" path="res://assets/fonts/Kenney Pixel Square.ttf" id="1_18gse"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_ahk15"]
+font = ExtResource("1_18gse")
+
+[node name="ContinueText" type="Label"]
+offset_right = 240.0
+offset_bottom = 24.0
+scale = Vector2(0.430921, 0.430921)
+text = "PRESS ENTER TO PROCEED"
+label_settings = SubResource("LabelSettings_ahk15")
+horizontal_alignment = 1

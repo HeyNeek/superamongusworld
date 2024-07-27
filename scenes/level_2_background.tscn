@@ -1,0 +1,14 @@
+[gd_scene load_steps=2 format=3 uid="uid://ctfp7h5oao44r"]
+
+[ext_resource type="Texture2D" uid="uid://cbjninxpooubq" path="res://assets/textures/bg/city_background.png" id="1_0r01a"]
+
+[node name="Level2Background" type="ParallaxBackground"]
+scroll_limit_end = Vector2(480, 270)
+
+[node name="ParallaxLayer" type="ParallaxLayer" parent="."]
+
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxLayer"]
+texture_repeat = 2
+position = Vector2(240, 135)
+scale = Vector2(0.276505, 0.276505)
+texture = ExtResource("1_0r01a")
