@@ -4,6 +4,7 @@ extends Node2D
 
 @onready var stage_music = $StageMusic
 @onready var clear_music = $ClearMusic
+@onready var yippee_sound = $YippeeSound
 
 @onready var continue_text_scene = preload("res://scenes/continue_text.tscn")
 
@@ -28,7 +29,6 @@ func reset_game():
 	get_tree().reload_current_scene()
 
 func _on_deathzone_body_entered(body):
-	print("death area entered")
 	body.is_active = false
 	await get_tree().create_timer(3).timeout
 	reset_game()
@@ -44,6 +44,7 @@ func _on_exit_body_entered(body):
 	stage_cleared = true
 	
 	stage_music.stop()
+	yippee_sound.play()
 	clear_music.play()
 	
 	body.is_active = false
