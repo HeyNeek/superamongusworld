@@ -1,0 +1,14 @@
+[gd_scene load_steps=2 format=3 uid="uid://cooab1rp27d47"]
+
+[ext_resource type="Texture2D" uid="uid://bruayodtwuuhw" path="res://assets/textures/bg/space_background.jpg" id="1_2n0au"]
+
+[node name="Level3Background" type="ParallaxBackground"]
+scroll_limit_end = Vector2(480, 270)
+
+[node name="ParallaxLayer" type="ParallaxLayer" parent="."]
+
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxLayer"]
+texture_repeat = 2
+position = Vector2(240, 135)
+scale = Vector2(0.75, 0.75)
+texture = ExtResource("1_2n0au")

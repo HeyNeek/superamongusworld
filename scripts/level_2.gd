@@ -1,5 +1,7 @@
 extends Node2D
 
+@export var next_level: PackedScene = null
+
 @onready var clear_music = $ClearMusic
 @onready var yippee_sound = $YippeeSound
 
@@ -17,6 +19,16 @@ func _ready():
 	stage_music.play()
 	vert_spike_ball1.animation_player.play("move_down")
 	vert_spike_ball2.animation_player.play("move_down")
+
+func _process(_delta):
+	if Input.is_action_just_pressed("quit"):
+		get_tree().quit()
+	elif Input.is_action_just_pressed("reset"):
+		print('reloaded')
+		reset_game()
+	
+	if stage_cleared == true && Input.is_action_just_pressed("enter"):
+		get_tree().change_scene_to_packed(next_level)
 
 func reset_game():
 	get_tree().reload_current_scene()

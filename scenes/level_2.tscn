@@ -1,7 +1,8 @@
-[gd_scene load_steps=15 format=3 uid="uid://dk8l4eq4xaixu"]
+[gd_scene load_steps=16 format=3 uid="uid://dk8l4eq4xaixu"]
 
 [ext_resource type="Script" path="res://scripts/level_2.gd" id="1_2mdh3"]
 [ext_resource type="PackedScene" uid="uid://cfbk3vd2viw4o" path="res://scenes/tile_map.tscn" id="1_8ygug"]
+[ext_resource type="PackedScene" uid="uid://7sdymga42x8x" path="res://scenes/level_3.tscn" id="2_d8m3j"]
 [ext_resource type="PackedScene" uid="uid://d2pvwojxxmre6" path="res://scenes/start_area.tscn" id="2_lirly"]
 [ext_resource type="PackedScene" uid="uid://bt6kre8fgx86a" path="res://scenes/jump_pad.tscn" id="2_y005b"]
 [ext_resource type="PackedScene" uid="uid://bkt4rx3stgj7d" path="res://scenes/player.tscn" id="3_hy0pr"]
@@ -19,6 +20,7 @@ size = Vector2(908, 26)
 
 [node name="Level2" type="Node2D"]
 script = ExtResource("1_2mdh3")
+next_level = ExtResource("2_d8m3j")
 
 [node name="JumpPad" parent="." instance=ExtResource("2_y005b")]
 position = Vector2(1515, 130)
