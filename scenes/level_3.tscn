@@ -1,9 +1,10 @@
-[gd_scene load_steps=13 format=3 uid="uid://7sdymga42x8x"]
+[gd_scene load_steps=16 format=3 uid="uid://7sdymga42x8x"]
 
 [ext_resource type="PackedScene" uid="uid://bkt4rx3stgj7d" path="res://scenes/player.tscn" id="1_kjotw"]
 [ext_resource type="Script" path="res://scripts/level_3.gd" id="1_oh4v4"]
 [ext_resource type="PackedScene" uid="uid://cfbk3vd2viw4o" path="res://scenes/tile_map.tscn" id="1_x2op4"]
 [ext_resource type="PackedScene" uid="uid://d2pvwojxxmre6" path="res://scenes/start_area.tscn" id="2_7b12a"]
+[ext_resource type="PackedScene" uid="uid://lksh3axyvngx" path="res://scenes/end_screen.tscn" id="2_meeyi"]
 [ext_resource type="PackedScene" uid="uid://bt6kre8fgx86a" path="res://scenes/jump_pad.tscn" id="3_0mrdj"]
 [ext_resource type="PackedScene" uid="uid://cooab1rp27d47" path="res://scenes/level_3_background.tscn" id="5_o5vrl"]
 [ext_resource type="PackedScene" uid="uid://2njgkefygfw4" path="res://scenes/spike_ball.tscn" id="7_c5hbi"]
@@ -12,9 +13,14 @@
 [ext_resource type="AudioStream" uid="uid://hsswmnwulca2" path="res://assets/audio/stage_clear.mp3" id="10_bdwms"]
 [ext_resource type="AudioStream" uid="uid://c3es4r273xdr8" path="res://assets/audio/Yippee.mp3" id="11_ohcmj"]
 [ext_resource type="AudioStream" uid="uid://dj6qm7x4vpcil" path="res://assets/audio/stage_music_3.mp3" id="12_urrhu"]
+[ext_resource type="AudioStream" uid="uid://dkjjn2jg7dvlg" path="res://assets/audio/death_sound.mp3" id="14_1ih65"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_bdbi1"]
+size = Vector2(908, 26)
 
 [node name="Level3" type="Node2D"]
 script = ExtResource("1_oh4v4")
+end_screen = ExtResource("2_meeyi")
 
 [node name="Player" parent="." instance=ExtResource("1_kjotw")]
 top_level = true
@@ -35,6 +41,16 @@ layer_0/tile_data = PackedInt32Array(720952, 1245184, 2, 327738, 1114112, 2, -65
 
 [node name="StartArea" parent="." instance=ExtResource("2_7b12a")]
 position = Vector2(34, 145)
+
+[node name="Deathzone" type="Area2D" parent="."]
+position = Vector2(100, 320)
+scale = Vector2(2.72, 1)
+collision_layer = 4
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Deathzone"]
+position = Vector2(157, 17)
+shape = SubResource("RectangleShape2D_bdbi1")
 
 [node name="JumpPads" type="Node2D" parent="."]
 
@@ -79,9 +95,6 @@ position = Vector2(694, 194)
 [node name="SpikeBall8" parent="Traps" instance=ExtResource("7_c5hbi")]
 position = Vector2(789, 194)
 
-[node name="SpikeBall9" parent="Traps" instance=ExtResource("7_c5hbi")]
-position = Vector2(753, -97)
-
 [node name="Saw" parent="Traps" instance=ExtResource("8_rceb0")]
 position = Vector2(657, 243)
 
@@ -109,6 +122,11 @@ volume_db = -10.465
 stream = ExtResource("12_urrhu")
 volume_db = -20.236
 
+[node name="DeathSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("14_1ih65")
+volume_db = -10.587
+
+[connection signal="body_entered" from="Deathzone" to="." method="_on_deathzone_body_entered"]
 [connection signal="touched_player" from="Traps/SpikeBall" to="." method="_on_trap_touched_player"]
 [connection signal="touched_player" from="Traps/SpikeBall2" to="." method="_on_trap_touched_player"]
 [connection signal="touched_player" from="Traps/SpikeBall3" to="." method="_on_trap_touched_player"]
@@ -116,7 +134,6 @@ volume_db = -20.236
 [connection signal="touched_player" from="Traps/SpikeBall5" to="." method="_on_trap_touched_player"]
 [connection signal="touched_player" from="Traps/SpikeBall6" to="." method="_on_trap_touched_player"]
 [connection signal="touched_player" from="Traps/SpikeBall8" to="." method="_on_trap_touched_player"]
-[connection signal="touched_player" from="Traps/SpikeBall9" to="." method="_on_trap_touched_player"]
 [connection signal="touched_player" from="Traps/Saw" to="." method="_on_trap_touched_player"]
 [connection signal="touched_player" from="Traps/Saw2" to="." method="_on_trap_touched_player"]
 [connection signal="touched_player" from="Traps/Saw3" to="." method="_on_trap_touched_player"]

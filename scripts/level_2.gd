@@ -4,6 +4,7 @@ extends Node2D
 
 @onready var clear_music = $ClearMusic
 @onready var yippee_sound = $YippeeSound
+@onready var death_sound = $DeathSound
 
 @onready var continue_text_scene = preload("res://scenes/continue_text.tscn")
 
@@ -35,13 +36,16 @@ func reset_game():
 
 func _on_deathzone_body_entered(_body):
 	player.is_active = false
+	death_sound.play()
 	await get_tree().create_timer(3).timeout
 	reset_game()
 
 func _on_spike_ball_touched_player():
 	player.is_active = false
+	player.collision_layer = 0
 	player.global_position.y += -35
 	player.animated_sprite.play("explode")
+	death_sound.play()
 	
 	await get_tree().create_timer(3).timeout
 	reset_game()

@@ -1,0 +1,130 @@
+[gd_scene load_steps=10 format=3 uid="uid://duyn6id0grpwo"]
+
+[ext_resource type="PackedScene" uid="uid://fichfmcl1hc7" path="res://scenes/background.tscn" id="1_5m47w"]
+[ext_resource type="Script" path="res://scripts/start_menu.gd" id="1_o2pug"]
+[ext_resource type="Texture2D" uid="uid://1b8yu4pv3gj8" path="res://assets/textures/bg/Green.png" id="2_y25ci"]
+[ext_resource type="FontFile" uid="uid://eup2x56qwi75" path="res://assets/fonts/SuperMario256.ttf" id="3_nyk5t"]
+[ext_resource type="FontFile" uid="uid://bg38rbtqovy6i" path="res://assets/fonts/Kenney Pixel Square.ttf" id="4_slf4v"]
+[ext_resource type="AudioStream" uid="uid://bfa4dp42s3mtk" path="res://assets/audio/title_theme.mp3" id="6_k3sdk"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_da4ob"]
+font_size = 8
+
+[sub_resource type="LabelSettings" id="LabelSettings_eh42t"]
+font = ExtResource("4_slf4v")
+font_size = 8
+
+[sub_resource type="LabelSettings" id="LabelSettings_bjmnq"]
+font = ExtResource("3_nyk5t")
+font_size = 24
+font_color = Color(0.979787, 0, 0.141087, 1)
+outline_size = 3
+outline_color = Color(0, 0, 0, 1)
+shadow_color = Color(0, 0, 0, 1)
+shadow_offset = Vector2(5, 5)
+
+[node name="StartMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_o2pug")
+
+[node name="Background" parent="." instance=ExtResource("1_5m47w")]
+bg_texture = ExtResource("2_y25ci")
+
+[node name="HowToPlayText" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -126.0
+offset_top = 11.0
+offset_right = -35.0
+offset_bottom = 89.0
+grow_horizontal = 0
+grow_vertical = 2
+text = "How to play:
+Move: A/D or Left/Right
+Jump: Space
+Reset: R
+Quit: ESC"
+label_settings = SubResource("LabelSettings_da4ob")
+horizontal_alignment = 1
+
+[node name="NameText" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -20.0
+offset_top = -23.0
+offset_right = 20.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "A silly little game by Nick Aguirre"
+label_settings = SubResource("LabelSettings_eh42t")
+
+[node name="Title" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -117.0
+offset_top = -68.0
+offset_right = 117.0
+offset_bottom = -44.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Super Crewmate World"
+label_settings = SubResource("LabelSettings_bjmnq")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="StartButton" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -50.0
+offset_top = -7.0
+offset_right = 50.0
+offset_bottom = 26.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("4_slf4v")
+text = "Start"
+
+[node name="QuitButton" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -35.0
+offset_top = 37.0
+offset_right = 35.0
+offset_bottom = 69.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("4_slf4v")
+text = "Quit"
+
+[node name="TitleScreenMusic" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("6_k3sdk")
+volume_db = -6.228
+autoplay = true
+
+[connection signal="pressed" from="StartButton" to="." method="_on_start_button_pressed"]
+[connection signal="pressed" from="QuitButton" to="." method="_on_quit_button_pressed"]

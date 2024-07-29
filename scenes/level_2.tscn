@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://dk8l4eq4xaixu"]
+[gd_scene load_steps=17 format=3 uid="uid://dk8l4eq4xaixu"]
 
 [ext_resource type="Script" path="res://scripts/level_2.gd" id="1_2mdh3"]
 [ext_resource type="PackedScene" uid="uid://cfbk3vd2viw4o" path="res://scenes/tile_map.tscn" id="1_8ygug"]
@@ -14,6 +14,7 @@
 [ext_resource type="PackedScene" uid="uid://cvcaco0f0aw82" path="res://scenes/exit.tscn" id="11_gpo4o"]
 [ext_resource type="AudioStream" uid="uid://hsswmnwulca2" path="res://assets/audio/stage_clear.mp3" id="12_bp6m0"]
 [ext_resource type="AudioStream" uid="uid://c3es4r273xdr8" path="res://assets/audio/Yippee.mp3" id="13_ndtx1"]
+[ext_resource type="AudioStream" uid="uid://dkjjn2jg7dvlg" path="res://assets/audio/death_sound.mp3" id="15_j5wyk"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_mft16"]
 size = Vector2(908, 26)
@@ -83,6 +84,10 @@ volume_db = -15.928
 [node name="YippeeSound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("13_ndtx1")
 volume_db = -10.465
+
+[node name="DeathSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("15_j5wyk")
+volume_db = -10.587
 
 [connection signal="body_entered" from="Deathzone" to="." method="_on_deathzone_body_entered"]
 [connection signal="touched_player" from="Traps/SpikeBall" to="." method="_on_spike_ball_touched_player"]

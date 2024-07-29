@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://wbhlmofkyins"]
+[gd_scene load_steps=16 format=3 uid="uid://wbhlmofkyins"]
 
 [ext_resource type="Script" path="res://scripts/level.gd" id="1_0etix"]
 [ext_resource type="PackedScene" uid="uid://fichfmcl1hc7" path="res://scenes/background.tscn" id="2_lvgsd"]
@@ -13,6 +13,7 @@
 [ext_resource type="PackedScene" uid="uid://cvcaco0f0aw82" path="res://scenes/exit.tscn" id="10_7gdqb"]
 [ext_resource type="AudioStream" uid="uid://hsswmnwulca2" path="res://assets/audio/stage_clear.mp3" id="11_rc3em"]
 [ext_resource type="AudioStream" uid="uid://c3es4r273xdr8" path="res://assets/audio/Yippee.mp3" id="13_27ghr"]
+[ext_resource type="AudioStream" uid="uid://dkjjn2jg7dvlg" path="res://assets/audio/death_sound.mp3" id="14_tqlty"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_rdcvo"]
 size = Vector2(908, 26)
@@ -81,6 +82,10 @@ volume_db = -15.928
 [node name="YippeeSound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("13_27ghr")
 volume_db = -10.465
+
+[node name="DeathSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("14_tqlty")
+volume_db = -10.587
 
 [connection signal="body_entered" from="Deathzone" to="." method="_on_deathzone_body_entered"]
 [connection signal="touched_player" from="Traps/Saw" to="." method="_on_trap_touched_player"]

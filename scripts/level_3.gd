@@ -1,8 +1,11 @@
 extends Node2D
 
+@export var end_screen: PackedScene = null
+
 @onready var clear_music = $ClearMusic
 @onready var stage_music = $StageMusic
 @onready var yippee_sound = $YippeeSound
+@onready var death_sound = $DeathSound
 
 @onready var continue_text_scene = preload("res://scenes/continue_text.tscn")
 
@@ -23,16 +26,27 @@ func _ready():
 	await get_tree().create_timer(1).timeout
 	vert_spike_ball3.animation_player.play("move_down")
 
+func _process(_delta):
+	if stage_cleared == true && Input.is_action_just_pressed("enter"):
+		get_tree().change_scene_to_packed(end_screen)
+
 func reset_game():
 	get_tree().reload_current_scene()
 
+func _on_deathzone_body_entered(body):
+	player.is_active = false
+	death_sound.play()
+	await get_tree().create_timer(3).timeout
+	reset_game()
+
 func _on_trap_touched_player():
 	player.is_active = false
+	player.collision_layer = 0
+	player.global_position.y += -35
 	player.animated_sprite.play("explode")
-	if player.is_on_floor() == true:
-		player.global_position.y += -35
+	death_sound.play()
 	
-	await get_tree().create_timer(2.5).timeout
+	await get_tree().create_timer(3).timeout
 	
 	reset_game()
 

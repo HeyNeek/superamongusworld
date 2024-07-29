@@ -1,0 +1,25 @@
+[gd_scene load_steps=2 format=3 uid="uid://cnpdcvk48pbqr"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_343ma"]
+line_spacing = 1.5
+font_size = 8
+outline_size = 3
+outline_color = Color(0, 0, 0, 1)
+
+[node name="CreditsText" type="Label"]
+offset_right = 40.0
+offset_bottom = 23.0
+text = "Progamming/Design/Animation:
+Nicholas Aguirre
+
+Artwork:
+The Internet
+
+Featured Music/Sounds:
+Star Fox
+Super Mario World
+Mega Man X
+Persona 4/5
+Tom and Jerry"
+label_settings = SubResource("LabelSettings_343ma")
+horizontal_alignment = 1

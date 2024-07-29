@@ -1,0 +1,154 @@
+[gd_scene load_steps=15 format=3 uid="uid://lksh3axyvngx"]
+
+[ext_resource type="FontFile" uid="uid://eup2x56qwi75" path="res://assets/fonts/SuperMario256.ttf" id="1_ajc4q"]
+[ext_resource type="Script" path="res://scripts/end_screen.gd" id="1_g21lo"]
+[ext_resource type="PackedScene" uid="uid://fichfmcl1hc7" path="res://scenes/background.tscn" id="2_0ecso"]
+[ext_resource type="PackedScene" uid="uid://duyn6id0grpwo" path="res://scenes/start_menu.tscn" id="2_2675m"]
+[ext_resource type="Texture2D" uid="uid://ciput1tenmhta" path="res://assets/textures/bg/Blue.png" id="3_iwcrn"]
+[ext_resource type="AudioStream" uid="uid://brkmg41f1384c" path="res://assets/audio/credits_music.mp3" id="6_mku33"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_44s40"]
+font = ExtResource("1_ajc4q")
+font_size = 18
+outline_size = 3
+outline_color = Color(0, 0, 0, 1)
+shadow_color = Color(0, 0, 0, 1)
+shadow_offset = Vector2(5, 5)
+
+[sub_resource type="Animation" id="Animation_fap4k"]
+resource_name = "move_right"
+length = 2.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 2.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, 50), Vector2(218, 50)]
+}
+
+[sub_resource type="Animation" id="Animation_icf7j"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_6qswt"]
+_data = {
+"RESET": SubResource("Animation_icf7j"),
+"move_right": SubResource("Animation_fap4k")
+}
+
+[sub_resource type="LabelSettings" id="LabelSettings_apyuq"]
+font = ExtResource("1_ajc4q")
+font_size = 18
+outline_size = 3
+outline_color = Color(0, 0, 0, 1)
+shadow_color = Color(0, 0, 0, 1)
+shadow_offset = Vector2(5, 5)
+
+[sub_resource type="Animation" id="Animation_f0xlm"]
+resource_name = "move_left"
+length = 2.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 2.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(440, 75), Vector2(218, 75)]
+}
+
+[sub_resource type="Animation" id="Animation_vordt"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(440, 75)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_vas4p"]
+_data = {
+"RESET": SubResource("Animation_vordt"),
+"move_left": SubResource("Animation_f0xlm")
+}
+
+[node name="EndScreen" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_g21lo")
+menu_screen = ExtResource("2_2675m")
+
+[node name="HeaderTextContainer1" type="Node2D" parent="."]
+
+[node name="TheText" type="Label" parent="HeaderTextContainer1"]
+offset_right = 40.0
+offset_bottom = 23.0
+text = "The"
+label_settings = SubResource("LabelSettings_44s40")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="HeaderTextContainer1"]
+libraries = {
+"": SubResource("AnimationLibrary_6qswt")
+}
+autoplay = "move_right"
+
+[node name="HeaderTextContainer2" type="Node2D" parent="."]
+position = Vector2(440, 75)
+
+[node name="EndText" type="Label" parent="HeaderTextContainer2"]
+offset_right = 40.0
+offset_bottom = 23.0
+text = "End"
+label_settings = SubResource("LabelSettings_apyuq")
+horizontal_alignment = 1
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="HeaderTextContainer2"]
+libraries = {
+"": SubResource("AnimationLibrary_vas4p")
+}
+autoplay = "move_left"
+
+[node name="Background" parent="." instance=ExtResource("2_0ecso")]
+bg_texture = ExtResource("3_iwcrn")
+
+[node name="CreditsTextContainer" type="Node2D" parent="."]
+position = Vector2(175, 120)
+
+[node name="ProceedTextContainer" type="Node2D" parent="."]
+position = Vector2(400, 240)
+
+[node name="EndScreenMusic" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("6_mku33")
+volume_db = -9.342
+autoplay = true
